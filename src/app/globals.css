@@ -2,26 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+
+.neo {
+  @apply border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.neo:hover {
+  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[4px] hover:translate-y-[4px] duration-300
+}
+.neo:focus-within{
+  @apply shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] focus-within:translate-x-[4px] focus-within:translate-y-[4px]
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.border-table {
+  @apply border-x-4 border-black
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.neo-table{
+  @apply border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]
 }
