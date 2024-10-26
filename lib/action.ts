@@ -7,21 +7,9 @@ import { redirect } from "next/navigation";
 
 const ContactSchema = z.object({
   name: z.string().min(4, "Name must be at least 4 characters"),
-  phone: z
-    .string()
-    .min(11, "Phone must be at least 11 characters")
-    .regex(/^\d+$/, "Phone must contain only numbers"),
+  phone: z.string().min(11, "Phone must be at least 11 characters"),
 });
 
-const CONTACT_PATH = "/contact";
-
-interface State {
-  error?: {
-    name?: string[];
-    phone?: string[];
-  };
-  message?: string;
-}
 export const saveContact = async (prevSate: any, formData: FormData) => {
   const validatedFields = ContactSchema.safeParse(
     Object.fromEntries(formData.entries())
@@ -29,7 +17,7 @@ export const saveContact = async (prevSate: any, formData: FormData) => {
 
   if (!validatedFields.success) {
     return {
-      Error: validatedFields.error.flatten().fieldErrors,
+      error: validatedFields.error.flatten().fieldErrors,
     };
   }
 
@@ -43,7 +31,6 @@ export const saveContact = async (prevSate: any, formData: FormData) => {
   } catch (error) {
     return { message: "Failed to create contact" };
   }
-
-  revalidatePath(CONTACT_PATH);
-  redirect(CONTACT_PATH);
+  revalidatePath("/contacts");
+  redirect("/contacts");
 };

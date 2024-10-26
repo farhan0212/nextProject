@@ -15,7 +15,7 @@
 }
 
 .border-table {
-  @apply border-x-4 border-black
+  @apply border border-4 border-x-4 border-black
 }
 
 .neo-table{
