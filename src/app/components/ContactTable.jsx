@@ -3,9 +3,9 @@ import { getContacts } from "../../../lib/data";
 import { formatDate } from "../../../lib/utils";
 import { DeleteButton, EditButton } from "./buttons";
 
-const ContactTable = async () => {
-  const contacts = await getContacts();
-  console.log(contacts);
+const ContactTable = async ({ query, currentPage }) => {
+  const contacts = await getContacts(query, currentPage);
+
   return (
     <div>
       <table className="w-full text-center font-extrabold neo-table bg-white">
@@ -20,15 +20,15 @@ const ContactTable = async () => {
         <tbody>
           {contacts.map((contact, index) => {
             return (
-              <tr key={index} className="">
+              <tr key={index} className="border-table">
                 <td className="py-3 px-6 border-table">{contact.name}</td>
                 <td className="py-3 px-6 border-table">{contact.phone}</td>
                 <td className="py-3 px-6 border-table">
                   {formatDate(contact.created_at.toString())}
                 </td>
                 <td className="flex justify-center gap-1 py-3">
-                  <EditButton />
-                  <DeleteButton />
+                  <EditButton id={contact.id} />
+                  <DeleteButton id={contact.id} />
                 </td>
               </tr>
             );

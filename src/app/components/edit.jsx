@@ -4,10 +4,12 @@ import React from "react";
 import { SubmitButton } from "./buttons";
 import { useFormState } from "react-dom";
 
-import { saveContact } from "../../../lib/action";
+import { updateContact } from "../../../lib/action";
 
-const CreateForm = () => {
-  const [state, formAction] = useFormState(saveContact, null);
+const EditForm = ({ contact }) => {
+  const UpdateContactById = updateContact.bind(null, contact.id);
+
+  const [state, formAction] = useFormState(UpdateContactById, null);
 
   return (
     <>
@@ -25,6 +27,7 @@ const CreateForm = () => {
           id="name"
           className="py-2 neo mb-4 w-full"
           placeholder="Name ...."
+          defaultValue={contact.name}
         />
         {state?.error?.name && (
           <p className="text-red-500">{state.error.name}</p>
@@ -40,15 +43,16 @@ const CreateForm = () => {
           id="phone"
           className="py-2 neo w-full mb-4"
           placeholder="Nomor Telepon ..."
+          defaultValue={contact.phone}
         />
         {state?.error?.name && (
           <p className="text-red-500">{state.error.name}</p>
         )}
         {state?.message && <p className="text-red-500">{state.message}</p>}
-        <SubmitButton label="save" />
+        <SubmitButton label="update" />
       </form>
     </>
   );
 };
 
-export default CreateForm;
+export default EditForm;

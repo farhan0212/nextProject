@@ -5,6 +5,7 @@ import { Pencil, Plus, Trash } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { useFormStatus } from "react-dom";
+import { deleteContact } from "../../../lib/action";
 
 export const CreateButton = () => {
   return (
@@ -16,27 +17,29 @@ export const CreateButton = () => {
   );
 };
 
-export const EditButton = () => {
+export const EditButton = ({ id }) => {
   return (
     <Link
-      href="/contacts/edit"
+      href={`/contacts/edit/${id}`}
       className=" p-2 hover:scale-125 duration-300 text-yellow-500 ">
       <Pencil size={24} strokeWidth={3} />
     </Link>
   );
 };
 
-export const DeleteButton = () => {
+export const DeleteButton = ({ id }) => {
+  const DeleteContactById = deleteContact.bind(null, id);
+
   return (
-    <Link
-      href="/contacts/edit"
-      className=" p-2 text-red-500 hover:scale-125 duration-300 ">
-      <Trash size={24} strokeWidth={3} />
-    </Link>
+    <form action={DeleteContactById}>
+      <button className=" p-2 text-red-500 hover:scale-125 duration-300 ">
+        <Trash size={24} strokeWidth={3} />
+      </button>
+    </form>
   );
 };
 
-export const SubmitButton = (Label) => {
+export const SubmitButton = ({ label }) => {
   const { pending } = useFormStatus();
 
   const className = clsx(
@@ -46,7 +49,7 @@ export const SubmitButton = (Label) => {
 
   return (
     <button type="submit" className={className}>
-      {Label === "save" ? (
+      {label === "save" ? (
         <span>{pending ? "Saving..." : "save"}</span>
       ) : (
         <span>{pending ? "Updating... " : "update"}</span>
