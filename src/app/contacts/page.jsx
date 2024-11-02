@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ContactTable from "../components/ContactTable";
 import Search from "../components/Search";
 import Pagination from "../components/Pagination";
 import { CreateButton } from "../components/buttons";
 import { getContactPages } from "../../../lib/data";
+import { TableSkeleton } from "../components/Skeleton";
 
 const Contacts = async ({ searchParams }) => {
   const query = searchParams?.query || "";
@@ -16,7 +17,9 @@ const Contacts = async ({ searchParams }) => {
         <Search />
         <CreateButton />
       </div>
-      <ContactTable query={query} currentPage={currentPage} />
+      <Suspense key={query + currentPage} fallback={<TableSkeleton />}>
+        <ContactTable query={query} currentPage={currentPage} />
+      </Suspense>
       <Pagination totalPages={totalPages} />
     </div>
   );

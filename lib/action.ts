@@ -6,7 +6,11 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 const ContactSchema = z.object({
-  name: z.string().min(4, "Name must be at least 4 characters"),
+  name: z
+    .string()
+    .regex(
+      /^[a-zA-Z](?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{7,}$/
+    ),
   phone: z.string().min(11, "Phone must be at least 11 characters"),
 });
 

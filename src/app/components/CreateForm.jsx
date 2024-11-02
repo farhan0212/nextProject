@@ -41,8 +41,8 @@ const CreateForm = () => {
           className="py-2 neo w-full mb-4"
           placeholder="Nomor Telepon ..."
         />
-        {state?.error?.name && (
-          <p className="text-red-500">{state.error.name}</p>
+        {state?.error?.phone && (
+          <p className="text-red-500">{state.error.phone}</p>
         )}
         {state?.message && <p className="text-red-500">{state.message}</p>}
         <SubmitButton label="save" />
