@@ -10,20 +10,23 @@ export const TableSkeleton = () => {
         </tr>
       </thead>
       <tbody className="animate-pulse">
-        <tr className="border-table bg-gray-500">
-          <td className="py-3 px-6 border-table">
-            <div className="bg-gray-500 h-4 w-4"></div>
-          </td>
-          <td className="py-3 px-6 border-table">
-            <div className="bg-gray-500 h-4 w-4"></div>
-          </td>
-          <td className="py-3 px-6 border-table">
-            <div className="bg-gray-500 h-4 w-4"></div>
-          </td>
-          <td className="flex justify-center gap-1 py-3">
-            <div className="bg-gray-500 h-4 w-4"></div>
-          </td>
-        </tr>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <tr key={index} className="border-table bg-gray-500">
+            <td className="py-3 px-6 border-table">
+              <div className="bg-gray-500 h-4 w-4"></div>
+            </td>
+            <td className="py-3 px-6 border-table">
+              <div className="bg-gray-500 h-4 w-4"></div>
+            </td>
+            <td className="py-3 px-6 border-table">
+              <div className="bg-gray-500 h-4 w-4"></div>
+            </td>
+            <td className="flex justify-center gap-1 py-3">
+              <div className="bg-gray-500 h-4 w-4"></div>
+              <div className="bg-gray-500 h-4 w-4"></div>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
